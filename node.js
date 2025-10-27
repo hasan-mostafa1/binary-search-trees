@@ -33,3 +33,5 @@ class Node {
     this.#right = right;
   }
 }
+
+export { Node };
