@@ -165,6 +165,37 @@ class Tree {
     this.postOrderForEach(callback, root.right);
     callback(root);
   }
+
+  height(value) {
+    let currentNode = this.#root;
+    let targetNode = null;
+    while (currentNode) {
+      if (value > currentNode.data) {
+        currentNode = currentNode.right;
+      } else if (value < currentNode.data) {
+        currentNode = currentNode.left;
+      } else {
+        targetNode = currentNode;
+        return this.getNodeHeight(targetNode);
+      }
+    }
+    return null;
+  }
+
+  getNodeHeight(node) {
+    let leftHeight = 0;
+    let rightHeight = 0;
+
+    if (node.left !== null) {
+      leftHeight = 1 + this.getNodeHeight(node.left);
+    }
+
+    if (node.right !== null) {
+      rightHeight = 1 + this.getNodeHeight(node.right);
+    }
+
+    return Math.max(leftHeight, rightHeight);
+  }
 }
 
 export { Tree };
