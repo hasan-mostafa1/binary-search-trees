@@ -109,6 +109,26 @@ class Tree {
     }
     return null;
   }
+
+  levelOrderForEach(callback) {
+    if (!callback) {
+      throw new Error("callback function is required!");
+    }
+
+    let currentNode = this.#root;
+    let queue = [];
+    queue.push(currentNode);
+    while (queue.length) {
+      let node = queue.shift();
+      callback(node);
+      if (node.left) {
+        queue.push(node.left);
+      }
+      if (node.right) {
+        queue.push(node.right);
+      }
+    }
+  }
 }
 
 export { Tree };
