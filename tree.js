@@ -129,6 +129,42 @@ class Tree {
       }
     }
   }
+
+  inOrderForEach(callback, root = this.#root) {
+    if (!callback) {
+      throw new Error("callback function is required!");
+    }
+
+    if (root === null) return;
+
+    this.inOrderForEach(callback, root.left);
+    callback(root);
+    this.inOrderForEach(callback, root.right);
+  }
+
+  preOrderForEach(callback, root = this.#root) {
+    if (!callback) {
+      throw new Error("callback function is required!");
+    }
+
+    if (root === null) return;
+
+    callback(root);
+    this.preOrderForEach(callback, root.left);
+    this.preOrderForEach(callback, root.right);
+  }
+
+  postOrderForEach(callback, root = this.#root) {
+    if (!callback) {
+      throw new Error("callback function is required!");
+    }
+
+    if (root === null) return;
+
+    this.postOrderForEach(callback, root.left);
+    this.postOrderForEach(callback, root.right);
+    callback(root);
+  }
 }
 
 export { Tree };
